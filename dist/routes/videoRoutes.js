@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const videoController_1 = require("../controller/videoController");
+const authController_1 = require("../controller/authController");
+const router = (0, express_1.Router)();
+router.route("/upload_video_url/:title/:ext").get(videoController_1.GetVideoUploadingUrlController);
+router.route("/user/login").post(authController_1.loginController);
+router.route("/user/signup").post(authController_1.signupController);
+exports.default = router;
