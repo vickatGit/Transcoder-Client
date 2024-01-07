@@ -10,3 +10,4 @@ exports.UserModel = mongoose_1.default.model("UserModel", new mongoose_1.default
     password: { type: String, required: true },
     userName: { type: String },
 }));
+//# sourceMappingURL=userModel.js.map

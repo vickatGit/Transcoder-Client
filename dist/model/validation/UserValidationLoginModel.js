@@ -9,3 +9,4 @@ exports.UserValidationLoginModel = joi_1.default.object({
     email: joi_1.default.string().required(),
     password: joi_1.default.string().required()
 });
+//# sourceMappingURL=UserValidationLoginModel.js.map

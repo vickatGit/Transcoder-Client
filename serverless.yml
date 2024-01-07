@@ -1,0 +1,38 @@
+service: transcoder-lambda
+
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+
+
+functions:
+  Inc:
+    handler: src/functions/IncrementJobSize.handler
+    events:
+      - s3:
+          bucket: transcoder-proj-bucket
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: temp/
+          existing: true
+          forceDeploy: true
+  Dec:
+    handler: src/functions/DecrementJobSize.handler
+    events:
+      - http:
+          path: "dec"
+          method: GET
+  Job-consumer:
+    handler: src/functions/VideoJobConsumer.handler
+    events:
+      - sqs:
+          arn: arn:aws:sqs:ap-south-1:332174178835:video-transcoding-queue.fifo
+          batchSize: 5
+          maximumConcurrency: 5
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-plugin-common-excludes

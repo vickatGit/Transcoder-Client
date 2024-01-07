@@ -12,19 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.authvalidator = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
 const authvalidator = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const authToken = req.headers.authorization || req.headers.authorization;
+    let authToken = req.headers.authorization || req.headers.authorization;
+    console.log("token", authToken);
     if (authToken) {
+        authToken = authToken.split(" ")[1];
         jsonwebtoken_1.default.verify(authToken, `${process.env.JWT_AUTH_SECRET_KEY}`, (err, decoded) => {
             if (err) {
                 res.status(400).send({
                     msg: "Unauthorised"
                 });
-                req.body.userId = decoded.userId;
             }
+            else {
+                console.log("user ", decoded);
+            }
+            req.body.userId = decoded.userId;
         });
     }
     else {
@@ -32,4 +38,7 @@ const authvalidator = (req, res, next) => __awaiter(void 0, void 0, void 0, func
             msg: "No Token Provided"
         });
     }
+    next();
 });
+exports.authvalidator = authvalidator;
+//# sourceMappingURL=AuthMiddleware.js.map

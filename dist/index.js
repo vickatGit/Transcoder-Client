@@ -22,3 +22,4 @@ app.listen(8080, () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, dbConnect_1.dbConnect)();
     console.log("application started running on port 8080 🚀🚀");
 }));
+//# sourceMappingURL=index.js.map
