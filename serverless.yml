@@ -1,5 +1,6 @@
 service: transcoder-lambda
 
+useDotenv: true
 
 provider:
   name: aws
@@ -28,7 +29,7 @@ functions:
     handler: src/functions/VideoJobConsumer.handler
     events:
       - sqs:
-          arn: arn:aws:sqs:ap-south-1:332174178835:video-transcoding-queue.fifo
+          arn: ${SQS_ARN}
           batchSize: 5
           maximumConcurrency: 5
 

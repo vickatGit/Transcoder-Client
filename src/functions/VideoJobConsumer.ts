@@ -11,7 +11,7 @@ const sqsClient = new SQSClient({
   },
 }
 );
-const queueUrl = "https://sqs.ap-south-1.amazonaws.com/332174178835/video-transcoding-queue.fifo"
+const queueUrl = `${process.env.SQS_QUEUE_URL}`
 
 const ecs = new ECS();
 const redisClient = createClient({
