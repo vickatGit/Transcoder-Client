@@ -9,8 +9,6 @@ const client = createClient({
     },
 })
 
-
-
 export const handler = async(event:any) => {
     const res = {
         statusCode:200,
@@ -23,8 +21,8 @@ export const handler = async(event:any) => {
         await client.quit()  
         console.log("dec")
     } catch (error) {
-        return JSON.stringify(error)
         console.log("error",error)
+        return JSON.stringify(error)
     }
     return res
 }
